@@ -49,22 +49,13 @@ namespace GeneticAlgorithm {
                 this.dna[idx] ^= true;
             }
         }
-        //public static int Dot(int[] a, bool[] b) {
-        //    //return a.Zip(b, (x, y) => x * (y ? 1 : 0)).Sum();
-        //    int sum = 0;
-        //    for (int i = 0; i < a.Length; i++) {
-        //        sum += a[i] * (b[i] ? 1 : 0);
-        //    }
-        //    return sum;
-        //}
         public static int Dot(int[] a, bool[] b) {
-            float[] conv1 = new float[a.Length];
-            a.CopyTo(conv1, 0);
-            var vec1 = Vector<Single>.Build.DenseOfArray(conv1);
-            float[] conv2 = new float[b.Length];
-            b.CopyTo(conv2, 0);
-            var vec2 = Vector<Single>.Build.DenseOfArray(conv2);
-            return (int)vec1.DotProduct(vec2);
+            //return a.Zip(b, (x, y) => x * (y ? 1 : 0)).Sum();
+            int sum = 0;
+            for (int i = 0; i < a.Length; i++) {
+                sum += a[i] * (b[i] ? 1 : 0);
+            }
+            return sum;
         }
     }
 }
