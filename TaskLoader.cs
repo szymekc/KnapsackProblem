@@ -2,8 +2,8 @@
 
 namespace GeneticAlgorithm {
     class TaskLoader {
-        static Task task;
-        static public Task Read(string filename) {
+        static Mission task;
+        static public Mission Read(string filename) {
             using (TextFieldParser parser = new TextFieldParser(filename)) {
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
@@ -13,7 +13,7 @@ namespace GeneticAlgorithm {
                 int.TryParse(fields[0], out n);
                 int.TryParse(fields[1], out w);
                 int.TryParse(fields[2], out s);
-                task = new Task(n, w, s);
+                task = new Mission(n, w, s);
                 int[] w_i = new int[n];
                 int[] s_i = new int[n];
                 int[] c_i = new int[n];

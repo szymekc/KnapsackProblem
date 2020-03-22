@@ -1,5 +1,5 @@
 ﻿namespace GeneticAlgorithm {
-    class Task {
+    class Mission {
         public int n;
         public int w;
         public int s;
@@ -7,7 +7,7 @@
         public int[] s_i;
         public int[] c_i;
 
-        public Task(int n, int w, int s) {
+        public Mission(int n, int w, int s) {
             this.n = n;
             this.w = w;
             this.s = s;

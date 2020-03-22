@@ -13,10 +13,10 @@ namespace GeneticAlgorithm {
             double mutation_rate = 0.001;
             string file = "C:\\Users\\szyme\\GeneticAlgorithm\\tasks.csv";
             Random rnd = new Random();
-            Task task = TaskLoader.Read(file);
+            Mission task = TaskLoader.Read(file);
             GeneticAlgorithm(task, pop_size, iterations, tournament_size, crossover_rate, mutation_rate);
         }
-        static List<int> GeneticAlgorithm(Task task, int pop_size, int iterations, int tournament_size, double crossover_rate, double mutation_rate) {
+        static List<int> GeneticAlgorithm(Mission task, int pop_size, int iterations, int tournament_size, double crossover_rate, double mutation_rate) {
             Population population = new Population(task.n, pop_size);
             List<int> bestScores = new List<int>();
             for (int i = 0; i < iterations; i++) {

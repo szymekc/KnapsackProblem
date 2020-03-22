@@ -15,7 +15,7 @@ namespace GeneticAlgorithm {
                 individuals[i] = new Individual(n_items);
             }
         }
-        public Individual Tournament(int size, Task task) {
+        public Individual Tournament(int size, Mission task) {
             HashSet<int> indices = new HashSet<int>();
             List<int> scores = new List<int>();
             while (indices.Count < size) {
