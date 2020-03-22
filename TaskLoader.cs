@@ -13,19 +13,20 @@ namespace GeneticAlgorithm {
                 int.TryParse(fields[0], out n);
                 int.TryParse(fields[1], out w);
                 int.TryParse(fields[2], out s);
-                Item[] itemList = new Item[n];
                 task = new Task(n, w, s);
+                int[] w_i = new int[n];
+                int[] s_i = new int[n];
+                int[] c_i = new int[n];
                 while (!parser.EndOfData) {
                     fields = parser.ReadFields();
-                    int w_i, s_i, c_i;
-                    int.TryParse(fields[0], out w_i);
-                    int.TryParse(fields[1], out s_i);
-                    int.TryParse(fields[2], out c_i);
-                    Item it = new Item(w_i, s_i, c_i);
-                    itemList[i] = it;
+                    int.TryParse(fields[0], out w_i[i]);
+                    int.TryParse(fields[1], out s_i[i]);
+                    int.TryParse(fields[2], out c_i[i]);
                     i++;
                 }
-                task.itemList = itemList;
+                task.w_i = w_i;
+                task.s_i = s_i;
+                task.c_i = c_i;
                 return task;
             }
         }

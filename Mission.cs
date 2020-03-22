@@ -3,7 +3,9 @@
         public int n;
         public int w;
         public int s;
-        public Item[] itemList;
+        public int[] w_i;
+        public int[] s_i;
+        public int[] c_i;
 
         public Task(int n, int w, int s) {
             this.n = n;

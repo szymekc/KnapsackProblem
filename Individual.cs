@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using MathNet.Numerics.LinearAlgebra;
+using System.Threading.Tasks;
 namespace GeneticAlgorithm {
     class Individual {
         bool[] dna;
@@ -14,21 +14,11 @@ namespace GeneticAlgorithm {
         public Individual(bool[] dna) {
             this.dna = dna;
         }
-        public int Evaluate(Task task) {
-            int[] w_arr = new int[task.n];
-            int[] s_arr = new int[task.n];
-            int[] c_arr = new int[task.n];
-            int i = 0;
-            foreach (Item it in task.itemList) {
-                w_arr[i] = it.w;
-                s_arr[i] = it.s;
-                c_arr[i] = it.c;
-                i++;
-            }
-            if (Dot(w_arr, dna) > task.w || Dot(s_arr, dna) > task.s) {
+        public int Evaluate(Mission task) {
+            if (Dot(task.w_i, dna) > task.w || Dot(task.s_i, dna) > task.s) {
                 return 0;
             } else {
-                return Dot(c_arr, dna);
+                return Dot(task.c_i, dna);
             }
         }
         public Individual Crossover(Individual partner, Double rate) {
@@ -50,12 +40,17 @@ namespace GeneticAlgorithm {
             }
         }
         public static int Dot(int[] a, bool[] b) {
-            //return a.Zip(b, (x, y) => x * (y ? 1 : 0)).Sum();
             int sum = 0;
             for (int i = 0; i < a.Length; i++) {
                 sum += a[i] * (b[i] ? 1 : 0);
             }
             return sum;
         }
+        //public async System.Threading.Tasks.Task Evaluate(Mission task) {
+
+        //}
+        //public async System.Threading.Tasks.Task<int> Dot(int[] a, bool[] b) {
+
+        //}
     }
 }
