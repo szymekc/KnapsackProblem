@@ -6,8 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MathNet.Numerics" Version="4.9.0" />
-    <PackageReference Include="MatplotlibCS" Version="1.0.63" />
+    <Compile Remove="Tests_source\**" />
+    <EmbeddedResource Remove="Tests_source\**" />
+    <None Remove="Tests_source\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ScottPlot" Version="4.0.22" />
   </ItemGroup>
 
 </Project>

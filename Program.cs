@@ -15,16 +15,53 @@ namespace GeneticAlgorithm {
             Stopwatch stopwatch = new Stopwatch();
             Random rnd = new Random();
             Task task = TaskLoader.Read(file);
-            stopwatch.Start();
-            Console.WriteLine("Best score in last gen {0}", GeneticAlgorithm(task, pop_size, iterations, tournament_size, crossover_rate, mutation_rate)[iterations-1]);
-            stopwatch.Stop();
-            TimeSpan ts = stopwatch.Elapsed;
-            Console.WriteLine("{0}ms per iteration", ts.TotalMilliseconds / iterations);
 
+            var data = new List<double[]>();
+            for (crossover_rate = 0.8; crossover_rate < 0.95; crossover_rate += 0.05) {
+                var scores = new List<double[]>();
+                for (int i = 0; i < 5; i++) {
+                    scores.Add(RunAlgorithm(task, pop_size, iterations, tournament_size, crossover_rate, mutation_rate));
+                }
+                data.Add(AverageScores(scores));
+            }
+            GraphGenerator.Run(data,"Crossover rate", new double[] { 0.8, 0.85, 0.9 });
+
+            crossover_rate = 0.9;
+            data = new List<double[]>();
+            for (mutation_rate = 0.001; mutation_rate < 0.0025; mutation_rate += 0.0005) {
+                var scores = new List<double[]>();
+                for (int i = 0; i < 5; i++) {
+                    scores.Add(RunAlgorithm(task, pop_size, iterations, tournament_size, crossover_rate, mutation_rate));
+                }
+                data.Add(AverageScores(scores));
+            }
+            GraphGenerator.Run(data, "Mutation rate", new double[] { 0.001, 0.0015, 0.002 });
+
+            mutation_rate = 0.001;
+            data = new List<double[]>();
+            for (tournament_size = 5; tournament_size < 25; tournament_size += 5) {
+                var scores = new List<double[]>();
+                for (int i = 0; i < 5; i++) {
+                    scores.Add(RunAlgorithm(task, pop_size, iterations, tournament_size, crossover_rate, mutation_rate));
+                }
+                data.Add(AverageScores(scores));
+            }
+            GraphGenerator.Run(data, "Tournament size", new double[] { 5, 10, 15, 20 });
+
+            tournament_size = 10;
+            data = new List<double[]>();
+            for (pop_size = 100; pop_size < 350; pop_size += 50) {
+                var scores = new List<double[]>();
+                for (int i = 0; i < 5; i++) {
+                    scores.Add(RunAlgorithm(task, pop_size, iterations, tournament_size, crossover_rate, mutation_rate));
+                }
+                data.Add(AverageScores(scores));
+            }
+            GraphGenerator.Run(data, "Population size", new double[] { 100, 150, 200, 250, 300 });
         }
-        static List<int> GeneticAlgorithm(Task task, int pop_size, int iterations, int tournament_size, double crossover_rate, double mutation_rate) {
+        static double[] RunAlgorithm(Task task, int pop_size, int iterations, int tournament_size, double crossover_rate, double mutation_rate) {
             Population population = new Population(task.n, pop_size);
-            List<int> bestScores = new List<int>();
+            var bestScores = new double[iterations];
             for (int i = 0; i < iterations; i++) {
                 population.Evaluate(task);
                 Population new_population = new Population(pop_size);
@@ -40,18 +77,18 @@ namespace GeneticAlgorithm {
                 foreach (Individual el in population.individuals) {
                     scores.Add(el.score);
                 }
-                bestScores.Add(scores.Max());
+                bestScores[i] = (double)scores.Max();
             }
             return bestScores;
         }
-        public static List<int> AverageScores(List<List<int>> allScores) {
-            List<int> avgScore = new List<int>();
-            for (int i = 0; i < allScores[0].Count; i++) {
-                int sum = 0;
+        public static double[] AverageScores(List<double[]> allScores) {
+            double[] avgScore = new double[allScores[0].Length];
+            for (int i = 0; i < allScores[0].Length; i++) {
+                double sum = 0;
                 for (int j = 0; j < allScores.Count; j++) {
                     sum += allScores[j][i];
                 }
-                avgScore.Add(sum / allScores.Count);
+                avgScore[i] = (sum / allScores.Count);
             }
             return avgScore;
         }

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 namespace GeneticAlgorithm {
     public class Individual {
         public bool[] dna;
@@ -26,10 +25,10 @@ namespace GeneticAlgorithm {
             int crossoverPoint = (int)(rnd.NextDouble() * dna.Length);
             if (rnd.NextDouble() < rate) {
                 bool[] ret = new bool[dna.Length];
-                for (int i=0; i < crossoverPoint; i++) {
+                for (int i = 0; i < crossoverPoint; i++) {
                     ret[i] = dna[i];
                 }
-                for (int i=crossoverPoint; i < dna.Length; i++) {
+                for (int i = crossoverPoint; i < dna.Length; i++) {
                     ret[i] = partner.dna[i];
                 }
                 return new Individual(dna: ret);
