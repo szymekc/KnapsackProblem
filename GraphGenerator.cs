@@ -1,7 +1,4 @@
-﻿using ScottPlot;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace GeneticAlgorithm {
     class GraphGenerator {
@@ -14,7 +11,7 @@ namespace GeneticAlgorithm {
             plt.Title("Scores of each generation");
             plt.YLabel("Score");
             plt.XLabel("Iterations");
-            plt.Ticks(useExponentialNotation: false, useMultiplierNotation:false);
+            plt.Ticks(useExponentialNotation: false, useMultiplierNotation: false);
             plt.Legend();
             plt.SaveFig(label + ".png");
         }

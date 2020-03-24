@@ -8,7 +8,7 @@ namespace GeneticAlgorithm {
         public Individual(int n_items) {
             dna = new bool[n_items];
             for (int i = 0; i < n_items; i++) {
-                dna[i] = rnd.Next(5) == 0;
+                dna[i] = rnd.Next(10) == 0;
             }
         }
         public Individual(bool[] dna) {
